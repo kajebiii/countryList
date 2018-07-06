@@ -20,16 +20,6 @@ sagaMiddleware.run(sagas)
 const action = type => store.dispatch({type})
 
 function render() {
-    //ReactDOM.render(<HelloWorld />, document.getElementById('app'))
-    var country_state = {}
-    for(var i=0; i<10; i++) {
-        country_state["code"+i] = {
-        capital:"capital"+i,
-        name:"name"+i,
-        continent:"continent"+i,
-        phone:"phone"+i,
-        }
-    }
     ReactDOM.render(
         <CountryList 
             country_state={store.getState().country_state}
