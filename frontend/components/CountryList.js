@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
-import Country from './Country'
+import CountryTbody from './CountryTbody'
 import Input from './Input'
 
 const Wrapper = styled.div`
@@ -9,27 +9,49 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const CountryList = ({ country_state, action_initial_country, action_add_country, children, ...props }) => {
-  let code, continent, name, capital, phone
-  const send_add_country = () => {
-    action_add_country(code.value, continent.value, name.value, capital.value, phone.value)
+class CountryList extends React.Component {
+  constructor( props ){
+    super(props)
+    this.lecture_id = -1;
+    this.row_click = this.row_click.bind(this);
   }
-  const send_initial_country = () => {
-    action_initial_country()
+  row_click(id) {
+    this.lecture_id = id;
+    this.forceUpdate()
   }
-  return (
-    <Wrapper {...props}>
-      <button onClick={send_initial_country}>초기화</button>
-      <Input type="text" placeholder="code" innerRef={(ref) => {code = ref;}}></Input>
-      <Input type="text" placeholder="continent" innerRef={(ref) => {continent = ref;}}></Input>
-      <Input type="text" placeholder="name" innerRef={(ref) => {name = ref;}}></Input>
-      <Input type="text" placeholder="capital" innerRef={(ref) => {capital = ref;}}></Input>
-      <Input type="text" placeholder="phone" innerRef={(ref) => {phone = ref;}}></Input>
-      <button onClick={send_add_country}>추가</button>
-      {(Object.keys(country_state)).map( (code) => <Country key={code} country={{...country_state[code], code:code}}/>)}
-      {children}
-    </Wrapper>
-  )
+  render(){
+    var { country_state, action_initial_country, action_add_country, children, ...props } = this.props
+    let code, continent, name, capital, phone
+    const send_add_country = () => {
+      action_add_country(code.value, continent.value, name.value, capital.value, phone.value)
+    }
+    const send_initial_country = () => {
+      action_initial_country()
+    }
+    let countries = (Object.keys(country_state)).map( (code) => ({...country_state[code], code:code}))
+    return (
+      <Wrapper {...props}>
+        <button onClick={send_initial_country}>초기화</button>
+        <Input type="text" placeholder="code" innerRef={(ref) => {code = ref;}}></Input>
+        <Input type="text" placeholder="continent" innerRef={(ref) => {continent = ref;}}></Input>
+        <Input type="text" placeholder="name" innerRef={(ref) => {name = ref;}}></Input>
+        <Input type="text" placeholder="capital" innerRef={(ref) => {capital = ref;}}></Input>
+        <Input type="text" placeholder="phone" innerRef={(ref) => {phone = ref;}}></Input>
+        <button onClick={send_add_country}>추가</button>
+        <table>
+          <thead><tr>
+            <th>코드</th>
+            <th>대륙</th>
+            <th>이름</th>
+            <th>수도</th>
+            <th>번호</th>
+          </tr></thead>
+          <CountryTbody countries={countries}/>
+        </table>
+        {children}
+      </Wrapper>
+    )
+  }
 }
 
 export default CountryList
