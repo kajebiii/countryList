@@ -6,6 +6,7 @@ import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
 import CountryList from './components/CountryList'
+import AlertList from './components/AlertList'
 import reducers from './store/reducers'
 import sagas from './store/sagas'
 import { initial_country, add_check_country } from './store/actions'
@@ -27,6 +28,12 @@ function render() {
             action_add_country={(code, continent, name, capital, phone) => action(add_check_country(code, continent, name, capital, phone))}
         />,
         document.getElementById('app')
+    )
+    ReactDOM.render(
+        <AlertList 
+            alert_state={store.getState().alert_state}
+        />,
+        document.getElementById('alert')
     )
 }
 
