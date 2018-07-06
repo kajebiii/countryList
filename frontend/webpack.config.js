@@ -10,7 +10,13 @@ module.exports = {
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'public'),
-    port: 3000
+    port: 3000,
+    proxy: {
+      "/api": {
+        target: "http://localhost:8000",
+        pathRewrite: {"^/api" : ""}
+      },
+    }
   },
   module: {
     rules: [
