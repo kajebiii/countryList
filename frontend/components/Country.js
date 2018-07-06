@@ -9,18 +9,14 @@ const Wrapper = styled.div`
 
 const Country = ({ country, children, ...props }) => {
   return (
-    <Wrapper {...props}>
-      <table><tbody>
-        <tr>
-          <td>{country.code}</td>
-          <td>{country.continent}</td>
-          <td>{country.name}</td>
-          <td>{country.capital}</td>
-          <td>{country.phone}</td>
-        </tr>
-      </tbody></table>
+    <tr>
+      <td>{country.code}</td>
+      <td>{country.continent}</td>
+      <td>{country.name}</td>
+      <td>{country.capital}</td>
+      <td>{country.phone}</td>
       {children}
-    </Wrapper>
+    </tr>
   )
 }
 
