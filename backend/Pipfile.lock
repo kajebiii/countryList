@@ -1,0 +1,20 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "40f12a7e1432fc5c0a5a9fbbaae91a0852cc180902788aaadfbc037195110347"
+        },
+        "requires": {},
+        "sources": [
+            {
+                "url": "https://pypi.python.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "Django": "*",
+        "djangorestframework": "*",
+        "requests": "*"
+    },
+    "develop": {}
+}
