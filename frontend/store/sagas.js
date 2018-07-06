@@ -21,8 +21,7 @@ export function* watchInitialCountry(action){
         let name = data_name[code]
         let capital = data_capital[code]
         let phone = data_phone[code]
-        if(code === "KR")
-            country_dictionary[code] = {continent:continent, name:name, capital:capital, phone:phone}
+        country_dictionary[code] = {continent:continent, name:name, capital:capital, phone:phone}
     })
     yield put(actions.set_country(country_dictionary))   
 }
