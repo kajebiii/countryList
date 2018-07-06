@@ -25,8 +25,18 @@ export function* watchInitialCountry(action){
     })
     yield put(actions.set_country(country_dictionary))   
 }
+export function* watchAddCheckCountry(action) {
+    const country_state = yield select((state) => state.country_state)
+    const {code, continent, name, capital, phone} = action
+    if(code in country_state) {
+
+    }else{
+        yield put(actions.add_country(code, continent, name, capital, phone))
+    }
+}
 
 export default function* () {
     yield fork(watchInitialCountry)
     yield takeEvery(actions.INITIAL_COUNTRY, watchInitialCountry)
+    yield takeEvery(actions.ADD_CHECK_COUNTRY, watchAddCheckCountry)
 }
