@@ -9,12 +9,29 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
+const HoverButton = styled.button`
+  &:hover {
+    background-color: #bdf;
+  }
+`
+const SelectButton = styled.button`
+  background-color: #fb9;
+`
+const koreanHead = ["코드", "대륙", "이름", "수도", "번호"]
+const englishHead = ["code", "continent", "name", "capital", "phone"]
+const buttonList = ["^", "v"]
+
 class CountryList extends React.Component {
   constructor( props ){
     super(props)
+    this.button_click = this.button_click.bind(this)
+  }
+  button_click(headIndex, buttonIndex) {
+    var { action_select_sort } = this.props
+    action_select_sort(headIndex, buttonIndex)
   }
   render(){
-    var { country_state, action_initial_country, action_add_country, children, ...props } = this.props
+    var { country_state, sort_state, action_initial_country, action_add_country, children, ...props } = this.props
     let code, continent, name, capital, phone
     const send_add_country = () => {
       action_add_country(code.value, continent.value, name.value, capital.value, phone.value)
@@ -23,6 +40,12 @@ class CountryList extends React.Component {
       action_initial_country()
     }
     let countries = (Object.keys(country_state)).map( (code) => ({...country_state[code], code:code}))
+    countries.sort(function(country_0, country_1) {
+      var multi = 1
+      var field = englishHead[sort_state.headIndex]
+      if(buttonList[sort_state.buttonIndex] == 'v') multi = -1
+      return multi * (country_0[field].localeCompare(country_1[field]))
+    });
     return (
       <Wrapper {...props}>
         <button onClick={send_initial_country}>초기화</button>
@@ -34,11 +57,23 @@ class CountryList extends React.Component {
         <button onClick={send_add_country}>추가</button>
         <table>
           <thead><tr>
-            <th>코드</th>
-            <th>대륙</th>
-            <th>이름</th>
-            <th>수도</th>
-            <th>번호</th>
+            {(Array.from(new Array(5),(val,index)=>index)).map( (headIndex) => 
+              <th key={headIndex}>
+                {koreanHead[headIndex]}
+                <br/>
+                {(Array.from(new Array(2),(val,index)=>index)).map( (buttonIndex) => 
+                  (headIndex == sort_state.headIndex && buttonIndex == sort_state.buttonIndex ?
+                    <SelectButton key={buttonIndex} onClick={()=>this.button_click(headIndex, buttonIndex)}>
+                      {buttonList[buttonIndex]}
+                    </SelectButton>
+                    :
+                    <HoverButton key={buttonIndex} onClick={()=>this.button_click(headIndex, buttonIndex)}>
+                    {buttonList[buttonIndex]}
+                    </HoverButton>
+                  )
+                )}
+              </th>
+            )}
           </tr></thead>
           <CountryTbody countries={countries}/>
         </table>
