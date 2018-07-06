@@ -12,12 +12,6 @@ const Wrapper = styled.div`
 class CountryList extends React.Component {
   constructor( props ){
     super(props)
-    this.lecture_id = -1;
-    this.row_click = this.row_click.bind(this);
-  }
-  row_click(id) {
-    this.lecture_id = id;
-    this.forceUpdate()
   }
   render(){
     var { country_state, action_initial_country, action_add_country, children, ...props } = this.props
