@@ -19,6 +19,21 @@ const country_state = (country_state = initialCountryState, action) => {
     }
 }
 
+const initialSortState = {
+    headIndex:0, 
+    buttonIndex:0,
+}
+
+const sort_state = (sort_state = initialSortState, action) => {
+    switch(action.type) {
+        case actions.SELECT_SORT:
+            var { headIndex, buttonIndex } = action
+            return {headIndex, buttonIndex}
+        default:
+            return sort_state
+    }
+}
+
 const initialAlertState = {
     messages: []
 }
@@ -36,6 +51,7 @@ const alert_state = (alert_state = initialAlertState, action) => {
 
 const country_reducer = combineReducers({
     country_state,
+    sort_state,
     alert_state,
 });
     
