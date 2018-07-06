@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
-import Counter from './components/Counter'
+import CountryList from './components/CountryList'
 import reducers from './store/reducers'
 import sagas from './store/sagas'
 
@@ -20,13 +20,18 @@ const action = type => store.dispatch({type})
 
 function render() {
     //ReactDOM.render(<HelloWorld />, document.getElementById('app'))
+    var country_state = {}
+    for(var i=0; i<10; i++) {
+        country_state["code"+i] = {
+        capital:"capital"+i,
+        name:"name"+i,
+        continent:"continent"+i,
+        phone:"phone"+i,
+        }
+    }
     ReactDOM.render(
-    <Counter
-        value={store.getState()}
-        onIncrement={() => action('INCREMENT')}
-        onDecrement={() => action('DECREMENT')}
-        onIncrementAsync={() => action('INCREMENT_ASYNC')}/>,
-    document.getElementById('app')
+        <CountryList country_state={country_state}/>,
+        document.getElementById('app')
     )
 }
 
