@@ -5,9 +5,11 @@ import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
-import Counter from './components/Counter'
+import CountryList from './components/CountryList'
+import AlertList from './components/AlertList'
 import reducers from './store/reducers'
 import sagas from './store/sagas'
+import { initial_country, add_check_country } from './store/actions'
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
@@ -16,17 +18,22 @@ const store = createStore(
 )
 sagaMiddleware.run(sagas)
 
-const action = type => store.dispatch({type})
+const action = type => store.dispatch(type)
 
 function render() {
-    //ReactDOM.render(<HelloWorld />, document.getElementById('app'))
     ReactDOM.render(
-    <Counter
-        value={store.getState()}
-        onIncrement={() => action('INCREMENT')}
-        onDecrement={() => action('DECREMENT')}
-        onIncrementAsync={() => action('INCREMENT_ASYNC')}/>,
-    document.getElementById('app')
+        <CountryList 
+            country_state={store.getState().country_state}
+            action_initial_country={() => action(initial_country())}
+            action_add_country={(code, continent, name, capital, phone) => action(add_check_country(code, continent, name, capital, phone))}
+        />,
+        document.getElementById('app')
+    )
+    ReactDOM.render(
+        <AlertList 
+            alert_state={store.getState().alert_state}
+        />,
+        document.getElementById('alert')
     )
 }
 
