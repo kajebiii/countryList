@@ -2,6 +2,7 @@ import React, { PropTypes, Fragment } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import Input from './Input'
+import { koreanHead, englishHead, buttonList } from './constValue'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -24,6 +25,14 @@ class Country extends React.Component {
        this.send_modify_country()
        click_cancle()
     }
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    let isSame = true
+    for(let ix in englishHead) {
+      let field = englishHead[ix]
+      if(nextProps[field] !== this.props[field]) isSame = false;
+    }
+    return !isSame
   }
   render(){
     var { click_cancle, action_modify_country, action_delete_country, country, select, children, ...props } = this.props
