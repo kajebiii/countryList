@@ -84,6 +84,9 @@ class CountryList extends React.Component {
                 )}
               </th>
             )}
+            <th>
+              TODO
+            </th>
           </tr></thead>
           <CountryTbody countries={countries}/>
         </table>

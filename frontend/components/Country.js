@@ -15,6 +15,7 @@ const Country = ({ country, children, ...props }) => {
       <td>{country.name}</td>
       <td>{country.capital}</td>
       <td>{country.phone}</td>
+      <td></td>
       {children}
     </tr>
   )
