@@ -10,7 +10,6 @@ import CountryList from './containers/CountryList'
 import AlertList from './containers/AlertList'
 import reducers from './store/reducers'
 import sagas from './store/sagas'
-import { initial_country, add_check_country, select_sort } from './store/actions'
 
 const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
