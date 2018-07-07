@@ -6,6 +6,9 @@ import Input from './Input'
 import { koreanHead, englishHead, buttonList } from './constValue'
 
 const Wrapper = styled.div`
+  font-family: ${font('primary')};
+  color: ${palette('grayscale', 0)};
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,7 +83,7 @@ class CountryList extends React.Component {
         <Input type="text" placeholder="phone" innerRef={(ref) => {phone = ref;}}></Input>
         <button onClick={send_add_country}>추가</button>
         <hr/>
-        <table style={{'text-align': 'center'}} border={1}>
+        <table style={{'textAlign': 'center'}} border={1}>
           <thead><tr>
             {(Array.from(new Array(koreanHead.length),(val,index)=>index)).map( (headIndex) => 
               <th key={headIndex}>
@@ -99,9 +102,6 @@ class CountryList extends React.Component {
                 )}
               </th>
             )}
-            <th>
-              변경
-            </th>
           </tr></thead>
         </table>
         <CountryTbody countries={countries}/>
