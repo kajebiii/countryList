@@ -1,5 +1,5 @@
-import * as actions from './actions';
-import { combineReducers } from 'redux';
+import * as actions from './actions'
+import { combineReducers } from 'redux'
 
 const initialCountryState = {
 }
@@ -82,6 +82,6 @@ const country_reducer = combineReducers({
     sort_state,
     search_state,
     alert_state,
-});
+})
     
-export default country_reducer;
+export default country_reducer

@@ -30,7 +30,7 @@ class Country extends React.Component {
     let isSame = true
     for(let ix in englishHead) {
       let field = englishHead[ix]
-      if(nextProps[field] !== this.props[field]) isSame = false;
+      if(nextProps[field] !== this.props[field]) isSame = false
     }
     return !isSame
   }
@@ -55,11 +55,11 @@ class Country extends React.Component {
       }
       return (
         <Fragment {...props} >
-          <div className="table-cell"><Input type="text" placeholder="code" onKeyDown={this.keyPress} defaultValue={country.code} innerRef={(ref) => {this.code = ref;}}></Input></div>
-          <div className="table-cell"><Input type="text" placeholder="continent" onKeyDown={this.keyPress} defaultValue={country.continent} innerRef={(ref) => {this.continent = ref;}}></Input></div>
-          <div className="table-cell"><Input type="text" placeholder="name" onKeyDown={this.keyPress} defaultValue={country.name} innerRef={(ref) => {this.name = ref;}}></Input></div>
-          <div className="table-cell"><Input type="text" placeholder="capital" onKeyDown={this.keyPress} defaultValue={country.capital} innerRef={(ref) => {this.capital = ref;}}></Input></div>
-          <div className="table-cell"><Input type="text" placeholder="phone" onKeyDown={this.keyPress} defaultValue={country.phone} innerRef={(ref) => {this.phone = ref;}}></Input></div>
+          <div className="table-cell"><Input type="text" placeholder="code" onKeyDown={this.keyPress} defaultValue={country.code} innerRef={(ref) => {this.code = ref}}></Input></div>
+          <div className="table-cell"><Input type="text" placeholder="continent" onKeyDown={this.keyPress} defaultValue={country.continent} innerRef={(ref) => {this.continent = ref}}></Input></div>
+          <div className="table-cell"><Input type="text" placeholder="name" onKeyDown={this.keyPress} defaultValue={country.name} innerRef={(ref) => {this.name = ref}}></Input></div>
+          <div className="table-cell"><Input type="text" placeholder="capital" onKeyDown={this.keyPress} defaultValue={country.capital} innerRef={(ref) => {this.capital = ref}}></Input></div>
+          <div className="table-cell"><Input type="text" placeholder="phone" onKeyDown={this.keyPress} defaultValue={country.phone} innerRef={(ref) => {this.phone = ref}}></Input></div>
           <div className="table-cell">
             <button onClick={()=>{this.send_modify_country(), click_cancle()} }>수정</button>
             <button onClick={()=>send_delete_country()}>삭제</button>
