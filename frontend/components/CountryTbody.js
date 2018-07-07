@@ -94,8 +94,6 @@ class CountryTbody extends React.Component {
     this.initState(this.props)
   }
   initState(props) {
-    console.log("initState")
-    console.log("initState", this.props.countries, 40)
     this.setState({lastCountry: getCountry(this.props.countries, 40), requestSent: true})
     setTimeout(this.findScroll, 2000)
   }
@@ -112,7 +110,6 @@ class CountryTbody extends React.Component {
     }
     let ix = 0
     for(let i=0; i<countries.length; i++) if(compareFunction(this.state.lastCountry, countries[i], sort_state) < 0) {ix = i; break;}
-    console.log("findScroll", countries, ix, ix+20-1)
     this.setState((prevState, props) => ({
       lastCountry: getCountry(countries, ix+20-1), requestSent: true
     }))
@@ -141,7 +138,6 @@ class CountryTbody extends React.Component {
     this.setState((prevState, props) => {
       let ix = 0
       for(let i=0; i<props.countries.length; i++) if(compareFunction(prevState.lastCountry, props.countries[i], props.sort_state) < 0) {ix = i; break;}
-      console.log("doQuery", props.countries, ix, ix+20-1)
       return {lastCountry: getCountry(props.countries, ix+20-1), requestSent: false}
     })
   }
@@ -155,7 +151,6 @@ class CountryTbody extends React.Component {
   }
   render(){
     var { countries, sort_state, children, ...props } = this.props
-    console.log(this.state.lastCountry)
     return (
       <Wrapper {...props}>
         <ReactCSSTransitionGroup className="table" style={{'textAlign': 'center'}}
