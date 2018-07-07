@@ -68,16 +68,21 @@ class CountryList extends React.Component {
     })
     return (
       <Wrapper {...props}>
-        <Input type="text" placeholder="searchWord" innerRef={(ref) => {searchWord = ref;}}></Input>
-        <button onClick={send_set_search_word}>검색하기</button>
-        <button onClick={send_initial_all}>초기화</button>
+        <button onClick={send_initial_all}>전체 초기화</button>
+        <hr/>
+        <div>
+          <Input type="text" placeholder="searchWord" innerRef={(ref) => {searchWord = ref;}}></Input>
+          <button onClick={send_set_search_word}>검색하기</button>
+        </div>
+        <hr/>
         <Input type="text" placeholder="code" innerRef={(ref) => {code = ref;}}></Input>
         <Input type="text" placeholder="continent" innerRef={(ref) => {continent = ref;}}></Input>
         <Input type="text" placeholder="name" innerRef={(ref) => {name = ref;}}></Input>
         <Input type="text" placeholder="capital" innerRef={(ref) => {capital = ref;}}></Input>
         <Input type="text" placeholder="phone" innerRef={(ref) => {phone = ref;}}></Input>
         <button onClick={send_add_country}>추가</button>
-        <table>
+        <hr/>
+        <table style={{'text-align': 'center'}}>
           <thead><tr>
             {(Array.from(new Array(koreanHead.length),(val,index)=>index)).map( (headIndex) => 
               <th key={headIndex}>
@@ -97,7 +102,7 @@ class CountryList extends React.Component {
               </th>
             )}
             <th>
-              TODO
+              변경
             </th>
           </tr></thead>
           <CountryTbody countries={countries}/>
