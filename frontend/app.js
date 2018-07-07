@@ -4,9 +4,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
 import createSagaMiddleware from 'redux-saga'
+import { Provider } from 'react-redux'
 
-import CountryList from './components/CountryList'
-import AlertList from './components/AlertList'
+import CountryList from './containers/CountryList'
+import AlertList from './containers/AlertList'
 import reducers from './store/reducers'
 import sagas from './store/sagas'
 import { initial_country, add_check_country, select_sort } from './store/actions'
@@ -22,19 +23,15 @@ const action = type => store.dispatch(type)
 
 function render() {
     ReactDOM.render(
-        <CountryList 
-            country_state={store.getState().country_state}
-            sort_state={store.getState().sort_state}
-            action_initial_country={() => action(initial_country())}
-            action_add_country={(code, continent, name, capital, phone) => action(add_check_country(code, continent, name, capital, phone))}
-            action_select_sort={(headIndex, buttonIndex) => action(select_sort(headIndex, buttonIndex))}
-        />,
+        <Provider store={store}>
+            <CountryList/>
+        </Provider>,
         document.getElementById('app')
     )
     ReactDOM.render(
-        <AlertList 
-            alert_state={store.getState().alert_state}
-        />,
+        <Provider store={store}>
+            <AlertList/>
+        </Provider>,
         document.getElementById('alert')
     )
 }
