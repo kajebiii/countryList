@@ -1,5 +1,5 @@
-import * as actions from './actions';
-import { combineReducers } from 'redux';
+import * as actions from './actions'
+import { combineReducers } from 'redux'
 
 const initialCountryState = {
 }
@@ -51,7 +51,7 @@ const initialSearchState = {
 const search_state = (search_state = initialSearchState, action) => {
     switch(action.type) {
         case actions.INITIAL_SEARCH:
-            return search_state
+            return initialSearchState
         case actions.SET_SEARCH_WORD:
             var { searchWord } = action
             return {
@@ -82,6 +82,6 @@ const country_reducer = combineReducers({
     sort_state,
     search_state,
     alert_state,
-});
+})
     
-export default country_reducer;
+export default country_reducer

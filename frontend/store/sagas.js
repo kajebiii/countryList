@@ -1,5 +1,5 @@
 import { takeEvery, put, call, fork, select, throttle } from 'redux-saga/effects'
-import { delay } from 'redux-saga';
+import { delay } from 'redux-saga'
 import * as actions from './actions'
 
 export function* watchInitialAll(action){

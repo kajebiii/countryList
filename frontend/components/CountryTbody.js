@@ -72,22 +72,17 @@ class CountryTbody extends React.Component {
           transitionLeaveTimeout={1000}>
 
           {countries.map( (country) => 
-            (country.code === this.country_code) ?
-            (
+            country.code === this.country_code ?
             <SelectTr className="table-row" key={country.code}>
               <Country 
                 click_cancle={this.click_cancle} 
                 country={country} 
                 select={true}
               />
-            </SelectTr>
-            ) 
-            :
-            (
+            </SelectTr>:
             <HoverTr className="table-row" key={country.code} onClick={()=>this.row_click(country.code)}>
               <Country country={country} select={false}/>
             </HoverTr>
-            )
           )}
         </ReactCSSTransitionGroup>
       </Wrapper>
