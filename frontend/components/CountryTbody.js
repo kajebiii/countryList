@@ -72,8 +72,8 @@ class CountryTbody extends React.Component {
   }
   initState(props) {
     console.log("initState")
-    this.setState({data: props.countries.slice(0, 0), requestSent: true})
-    setTimeout(this.findScroll, 4000)
+    this.setState({data: props.countries.slice(0, 40), requestSent: true})
+    setTimeout(this.findScroll, 2000)
   }
   findScroll() {
     var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop
@@ -102,7 +102,7 @@ class CountryTbody extends React.Component {
     if (scrolledToBottom) this.querySearchResult();
   }
   querySearchResult() {
-    if (this.state.requestSent) return;
+    if (this.state.requestSent || this.state.data.length === this.props.countries.length) return;
     this.setState({requestSent: true})
     setTimeout(this.doQuery, 1000)
   }
