@@ -1,5 +1,6 @@
 import * as actions from './actions'
 import { combineReducers } from 'redux'
+import { reducer as form_state } from 'redux-form';
 
 const initialCountryState = {
 }
@@ -82,6 +83,7 @@ const country_reducer = combineReducers({
     sort_state,
     search_state,
     alert_state,
+    form: form_state,
 })
     
 export default country_reducer
