@@ -48,7 +48,9 @@ export function* watchInitialAll(action){
 export function* watchAddCheckCountry(action) {
     const country_state = yield select((state) => state.country_state)
     const {code, continent, name, capital, phone} = action
-    if(code in country_state) {
+    if(code === "") {
+        yield put(actions.send_alert('코드로 공백은 불가능합니다.'))
+    }else if(code in country_state) {
         yield put(actions.send_alert('이미 존재하는 국가 코드입니다.'))
     }else{
         yield put(actions.add_country(code, continent, name, capital, phone))
