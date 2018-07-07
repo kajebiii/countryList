@@ -2,7 +2,9 @@ import { takeEvery, put, call, fork, select, throttle } from 'redux-saga/effects
 import { delay } from 'redux-saga';
 import * as actions from './actions'
 
-export function* watchInitialCountry(action){
+export function* watchInitialAll(action){
+    yield put(actions.initial_sort())
+    yield put(actions.initial_search())
     yield put(actions.send_alert('대륙정보 가져오는 중..'))
     const response_continent = yield call (fetch, `/api/continent.json`, {method: "GET",})
     if(!response_continent.ok) {
@@ -72,8 +74,8 @@ export function* watchSendAlert(action) {
 
 
 export default function* () {
-    yield fork(watchInitialCountry)
-    yield takeEvery(actions.INITIAL_COUNTRY, watchInitialCountry)
+    yield fork(watchInitialAll)
+    yield takeEvery(actions.INITIAL_ALL, watchInitialAll)
     yield takeEvery(actions.ADD_CHECK_COUNTRY, watchAddCheckCountry)
     yield takeEvery(actions.MODIFY_CHECK_COUNTRY, watchModifyCheckCountry)
 
