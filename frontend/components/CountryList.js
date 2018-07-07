@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import CountryTbody from './CountryTbody'
 import Input from './Input'
+import { koreanHead, englishHead, buttonList } from './constValue'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -17,9 +18,6 @@ const HoverButton = styled.button`
 const SelectButton = styled.button`
   background-color: #fb9;
 `
-const koreanHead = ["코드", "대륙", "이름", "수도", "번호"]
-const englishHead = ["code", "continent", "name", "capital", "phone"]
-const buttonList = ["^", "v"]
 
 class CountryList extends React.Component {
   constructor( props ){
