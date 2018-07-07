@@ -7,7 +7,7 @@ import createSagaMiddleware from 'redux-saga'
 import { Provider } from 'react-redux'
 
 import CountryList from './containers/CountryList'
-import AlertList from './components/AlertList'
+import AlertList from './containers/AlertList'
 import reducers from './store/reducers'
 import sagas from './store/sagas'
 import { initial_country, add_check_country, select_sort } from './store/actions'
@@ -29,9 +29,9 @@ function render() {
         document.getElementById('app')
     )
     ReactDOM.render(
-        <AlertList 
-            alert_state={store.getState().alert_state}
-        />,
+        <Provider store={store}>
+            <AlertList/>
+        </Provider>,
         document.getElementById('alert')
     )
 }
