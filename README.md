@@ -7,6 +7,8 @@ $ pipenv install
 $ pipenv shell
 [pipenv]$ python manage.py runserver [port 번호]
 ```
+기본포트는 8000번이다.
+
 ### 설명
 - Data URL을 그대로 전달해주는 서버
 	- http://country.io/continent.json
@@ -22,6 +24,8 @@ $ pipenv shell
 $ npm install
 $ npm start
 ```
+기본포트는 3000번이다.
+
 ### 설명
 - 리액트 페이지 개발
 	- 나라 정보(코드, 수도, 이름, 국가, 대륙, 전화번호)를 GET 으로 가져와 정보를 리스팅해주는 페이지
@@ -40,5 +44,10 @@ $ npm start
 	- 모든 상태(나라 목록, 정렬 상태, 검색어 등)은 redux에 저장됨
 	- Network 통신은 redux-saga 통해함
 	- Country Model을 정의하여 개발함
+
+- TODO
+	- 성능 최적화
+	- Design
+	- Row의 데이터를 수정할 때에도 redux-form 사용하게 바꾸기
 
 
