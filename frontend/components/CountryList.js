@@ -103,8 +103,8 @@ class CountryList extends React.Component {
               변경
             </th>
           </tr></thead>
-          <CountryTbody countries={countries}/>
         </table>
+        <CountryTbody countries={countries}/>
         {children}
       </Wrapper>
     )
