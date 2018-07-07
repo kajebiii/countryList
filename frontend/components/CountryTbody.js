@@ -5,20 +5,33 @@ import { font, palette } from 'styled-theme'
 import Country from '../containers/Country'
 
 const Wrapper = styled.div`
-.example-enter {
+font-family: ${font('primary')};
+color: ${palette('grayscale', 0)};
+
+.table {
+  display: table;
+}
+.table-row {
+  display: table-row;
+}
+.table-cell {
+  display: table-cell;
+}
+
+.country-row-enter {
 opacity: 0.01;
 }
 
-.example-enter.example-enter-active {
+.country-row-enter.country-row-enter-active {
 opacity: 1;
 transition: opacity 500ms ease-in;
 }
 
-.example-leave {
+.country-row-leave {
 opacity: 1;
 }
 
-.example-leave.example-leave-active {
+.country-row-leave.country-row-leave-active {
 opacity: 0.01;
 transition: opacity 300ms ease-in;
 }
@@ -53,29 +66,30 @@ class CountryTbody extends React.Component {
     var { countries, children, ...props } = this.props
     return (
       <Wrapper {...props}>
-      <ReactCSSTransitionGroup
-          transitionName="example"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
-        {countries.map( (country) => 
-          (country.code === this.country_code) ?
-          (
-          <SelectTr key={country.code}>
-            <Country 
-              click_cancle={this.click_cancle} 
-              country={country} 
-              select={true}
-            />
-          </SelectTr>
-          ) 
-          :
-          (
-          <HoverTr key={country.code} onClick={()=>this.row_click(country.code)}>
-            <Country country={country} select={false}/>
-          </HoverTr>
-          )
-        )}
-      </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup className="table" style={{'textAlign': 'center'}}
+          transitionName="country-row"
+          transitionEnterTimeout={1000}
+          transitionLeaveTimeout={1000}>
+
+          {countries.map( (country) => 
+            (country.code === this.country_code) ?
+            (
+            <SelectTr className="table-row" key={country.code}>
+              <Country 
+                click_cancle={this.click_cancle} 
+                country={country} 
+                select={true}
+              />
+            </SelectTr>
+            ) 
+            :
+            (
+            <HoverTr className="table-row" key={country.code} onClick={()=>this.row_click(country.code)}>
+              <Country country={country} select={false}/>
+            </HoverTr>
+            )
+          )}
+        </ReactCSSTransitionGroup>
       </Wrapper>
     )
   }
