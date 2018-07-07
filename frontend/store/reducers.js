@@ -34,6 +34,22 @@ const sort_state = (sort_state = initialSortState, action) => {
     }
 }
 
+const initialSearchState = {
+    searchWord: "",
+}
+
+const search_state = (search_state = initialSearchState, action) => {
+    switch(action.type) {
+        case actions.SET_SEARCH_WORD:
+            var { searchWord } = action
+            return {
+                searchWord
+            }
+        default:
+            return search_state
+    }
+}
+
 const initialAlertState = {
     messages: []
 }
@@ -52,6 +68,7 @@ const alert_state = (alert_state = initialAlertState, action) => {
 const country_reducer = combineReducers({
     country_state,
     sort_state,
+    search_state,
     alert_state,
 });
     
