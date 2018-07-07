@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { AlertList } from 'components'
+import AlertList from '../components/AlertList'
 import { get_articles } from '../store/actions'
 
 
