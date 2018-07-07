@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 
 const Country = ({ country, children, ...props }) => {
   return (
-    <tr>
+    <tr {...props} >
       <td>{country.code}</td>
       <td>{country.continent}</td>
       <td>{country.name}</td>

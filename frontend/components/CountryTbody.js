@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 
 const CountryTbody = ({ countries, children, ...props }) => {
   return (
-    <tbody>
+    <tbody {...props}>
       {countries.map( (country) => <Country key={country.code} country={country}/>)}
     </tbody>
   )
