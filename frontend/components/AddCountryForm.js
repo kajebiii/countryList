@@ -5,11 +5,10 @@ import { koreanHead, englishHead, buttonList } from './constValue'
 let AddCountryForm = props => {
   const { handleSubmit } = props
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} style={{'textAlign': 'center'}}>
       {englishHead.map( (head) => 
         <div key={head}>
-          <label htmlFor={head}>{head}</label>
-          <Field name={head} component="input" type="text" />
+          <Field name={head} component="Input" placeholder={head} type="text" style={{'textAlign': 'center'}}/>
         </div>
       )}
       <button type="submit">추가</button>
