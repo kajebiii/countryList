@@ -17,6 +17,7 @@ color: ${palette('grayscale', 0)};
 }
 .table-cell {
   display: table-cell;
+  border: 1px solid #bcbcbc;
 }
 
 .country-row-enter {
@@ -148,8 +149,8 @@ class CountryTbody extends React.Component {
       <Wrapper {...props}>
         <ReactCSSTransitionGroup className="table" style={{'textAlign': 'center'}}
           transitionName="country-row"
-          transitionEnterTimeout={1000}
-          transitionLeaveTimeout={1000}>
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}>
 
           {countries.map( (country) => {
             if(compareFunction(country, this.state.lastCountry, sort_state) > 0) return
