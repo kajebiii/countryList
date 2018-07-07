@@ -5,8 +5,12 @@ import CountryTbody from './CountryTbody'
 import Input from './Input'
 
 const Wrapper = styled.div`
-  font-family: ${font('primary')};
-  color: ${palette('grayscale', 0)};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 `
 
 const HoverButton = styled.button`
