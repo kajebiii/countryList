@@ -49,10 +49,18 @@ class CountryList extends React.Component {
       return false
     })
     countries.sort(function(country_0, country_1) {
-      var multi = 1
-      var field = englishHead[sort_state.headIndex]
+      let multi = 1
+      let field = englishHead[sort_state.headIndex]
       if(buttonList[sort_state.buttonIndex] == 'v') multi = -1
-      return multi * (country_0[field].localeCompare(country_1[field]))
+      let first_comp = multi * ( (country_0[field]<country_1[field] ? -1 : 0) + (country_1[field]<country_0[field] ? +1 : 0) )
+      if(first_comp != 0) return first_comp
+      for(var ix in englishHead) {
+        if(ix == sort_state.headIndex) continue;
+        let other_field = englishHead[ix]
+        let first_comp = multi * ( (country_0[other_field]<country_1[other_field] ? -1 : 0) + (country_1[other_field]<country_0[other_field] ? +1 : 0) )        
+        if(first_comp != 0) return first_comp
+      }
+      return 0
     })
     return (
       <Wrapper {...props}>
