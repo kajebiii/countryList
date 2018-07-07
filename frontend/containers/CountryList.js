@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import CountryList from '../components/CountryList'
-import { set_search_word, initial_country, add_check_country, select_sort } from '../store/actions'
+import { set_search_word, initial_all, add_check_country, select_sort } from '../store/actions'
 
 
 const mapStateToProps = (state) => ({
@@ -14,8 +14,8 @@ const mapDispatchToProps = (dispatch) => {
         action_set_search_word: (serachWord) => {
             dispatch(set_search_word(serachWord))
         },
-        action_initial_country: () => {
-            dispatch(initial_country())
+        action_initial_all: () => {
+            dispatch(initial_all())
         },
         action_add_country: (code, continent, name, capital, phone) => {
             dispatch(add_check_country(code, continent, name, capital, phone))

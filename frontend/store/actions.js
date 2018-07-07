@@ -1,11 +1,19 @@
+export const INITIAL_ALL = 'INITIAL_ALL'
+export const initial_all = () => ({type: INITIAL_ALL})
+
 export const INITIAL_COUNTRY = 'INITIAL_COUNTRY'
+export const initial_country = () => ({type: INITIAL_COUNTRY})
+export const INITIAL_SORT = 'INITIAL_SORT'
+export const initial_sort = () => ({type: INITIAL_SORT})
+export const INITIAL_SEARCH = 'INITIAL_SEARCH'
+export const initial_search = () => ({type: INITIAL_SEARCH})
+
 export const SET_COUNTRY = 'SET_COUNTRY'
 export const ADD_CHECK_COUNTRY = 'ADD_CHECK_COUNTRY'
 export const ADD_COUNTRY = 'ADD_COUNTRY'
 export const DELETE_COUNTRY = 'DELETE_COUNTRY'
 export const MODIFY_CHECK_COUNTRY = 'MODIFY_CHECK_COUNTRY'
 export const MODIFY_COUNTRY = 'MODIFY_COUNTRY'
-export const initial_country = () => ({type: INITIAL_COUNTRY})
 export const set_country = (country_dictionary) => ({type: SET_COUNTRY, country_dictionary})
 export const add_check_country = (code, continent, name, capital, phone) => ({type: ADD_CHECK_COUNTRY, code, continent, name, capital, phone})
 export const add_country = (code, continent, name, capital, phone) => ({type: ADD_COUNTRY, code, continent, name, capital, phone})

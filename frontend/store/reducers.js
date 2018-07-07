@@ -6,6 +6,8 @@ const initialCountryState = {
   
 const country_state = (country_state = initialCountryState, action) => {
     switch(action.type) {
+        case actions.INITIAL_COUNTRY:
+            return initialCountryState
         case actions.SET_COUNTRY:
             return action.country_dictionary
         case actions.ADD_COUNTRY:
@@ -32,6 +34,8 @@ const initialSortState = {
 
 const sort_state = (sort_state = initialSortState, action) => {
     switch(action.type) {
+        case actions.INITIAL_SORT:
+            return initialSortState
         case actions.SELECT_SORT:
             var { headIndex, buttonIndex } = action
             return {headIndex, buttonIndex}
@@ -46,6 +50,8 @@ const initialSearchState = {
 
 const search_state = (search_state = initialSearchState, action) => {
     switch(action.type) {
+        case actions.INITIAL_SEARCH:
+            return search_state
         case actions.SET_SEARCH_WORD:
             var { searchWord } = action
             return {

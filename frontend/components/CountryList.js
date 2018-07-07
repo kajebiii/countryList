@@ -31,7 +31,7 @@ class CountryList extends React.Component {
     action_select_sort(headIndex, buttonIndex)
   }
   render(){
-    var { country_state, sort_state, search_state, action_set_search_word, action_initial_country, action_add_country, children, ...props } = this.props
+    var { country_state, sort_state, search_state, action_set_search_word, action_initial_all, action_add_country, children, ...props } = this.props
     let searchWord
     const send_set_search_word = () => {
       action_set_search_word(searchWord.value)
@@ -40,8 +40,8 @@ class CountryList extends React.Component {
     const send_add_country = () => {
       action_add_country(code.value, continent.value, name.value, capital.value, phone.value)
     }
-    const send_initial_country = () => {
-      action_initial_country()
+    const send_initial_all = () => {
+      action_initial_all()
     }
     let countries = (Object.keys(country_state)).map( (code) => ({...country_state[code], code:code}))
     countries = countries.filter(country => {
@@ -66,7 +66,7 @@ class CountryList extends React.Component {
       <Wrapper {...props}>
         <Input type="text" placeholder="searchWord" innerRef={(ref) => {searchWord = ref;}}></Input>
         <button onClick={send_set_search_word}>검색하기</button>
-        <button onClick={send_initial_country}>초기화</button>
+        <button onClick={send_initial_all}>초기화</button>
         <Input type="text" placeholder="code" innerRef={(ref) => {code = ref;}}></Input>
         <Input type="text" placeholder="continent" innerRef={(ref) => {continent = ref;}}></Input>
         <Input type="text" placeholder="name" innerRef={(ref) => {name = ref;}}></Input>
