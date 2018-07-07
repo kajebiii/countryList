@@ -8,7 +8,7 @@ let AddCountryForm = props => {
     <form onSubmit={handleSubmit} style={{'textAlign': 'center'}}>
       {englishHead.map( (head) => 
         <div key={head}>
-          <Field name={head} component="Input" placeholder={head} type="text" style={{'textAlign': 'center'}}/>
+          <Field name={head} component="input" placeholder={head} type="text" style={{'textAlign': 'center'}}/>
         </div>
       )}
       <button type="submit">추가</button>
