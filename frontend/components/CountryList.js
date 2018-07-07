@@ -82,7 +82,7 @@ class CountryList extends React.Component {
         <Input type="text" placeholder="phone" innerRef={(ref) => {phone = ref;}}></Input>
         <button onClick={send_add_country}>추가</button>
         <hr/>
-        <table style={{'text-align': 'center'}}>
+        <table style={{'text-align': 'center'}} border={1}>
           <thead><tr>
             {(Array.from(new Array(koreanHead.length),(val,index)=>index)).map( (headIndex) => 
               <th key={headIndex}>
