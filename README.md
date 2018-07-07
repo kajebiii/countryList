@@ -49,5 +49,6 @@ $ npm start
 	- 성능 최적화
 	- Design
 	- Row의 데이터를 수정할 때에도 redux-form 사용하게 바꾸기
+	- 전체 초기화를 하면 모든 Component의 State 값도 초기화 하기
 
 
