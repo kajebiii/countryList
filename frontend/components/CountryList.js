@@ -28,6 +28,8 @@ const SelectButton = styled.button`
   background-color: #fb9;
 `
 
+let undefinedToEmpty = (dict, key) => (key in dict ? dict[key] : "")
+
 class CountryList extends React.Component {
   constructor( props ){
     super(props)
@@ -39,11 +41,15 @@ class CountryList extends React.Component {
   }
   send_set_search_word = values => {
     var { action_set_search_word } = this.props
-    action_set_search_word("searchWord" in values ? values.searchWord : "")
+    action_set_search_word(undefinedToEmpty(values, "searchWord"))
   }
   send_add_country = values => {
     var { action_add_country } = this.props
-    action_add_country(values.code, values.continent, values.name, values.capital, values.phone)
+    action_add_country(undefinedToEmpty(values, "code")
+    ,undefinedToEmpty(values, "continent")
+    ,undefinedToEmpty(values, "name")
+    ,undefinedToEmpty(values, "capital")
+    ,undefinedToEmpty(values, "phone"))
   }
   render(){
     var { country_state, sort_state, search_state, action_set_search_word, action_initial_all, action_add_country, children, ...props } = this.props
