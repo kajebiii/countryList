@@ -9,6 +9,9 @@ export const add_check_country = (code, continent, name, capital, phone) => ({ty
 export const add_country = (code, continent, name, capital, phone) => ({type: ADD_COUNTRY, code, continent, name, capital, phone})
 export const delete_country = (code) => ({type: DELETE_COUNTRY, code})
 
+export const SET_SEARCH_WORD = 'SET_SEARCH_WORD'
+export const set_search_word = (searchWord) => ({type: SET_SEARCH_WORD, searchWord})
+
 export const SELECT_SORT = 'SELECT_SORT'
 export const select_sort = (headIndex, buttonIndex) => ({type: SELECT_SORT, headIndex, buttonIndex})
 

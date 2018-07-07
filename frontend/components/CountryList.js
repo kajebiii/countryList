@@ -31,7 +31,11 @@ class CountryList extends React.Component {
     action_select_sort(headIndex, buttonIndex)
   }
   render(){
-    var { country_state, sort_state, action_initial_country, action_add_country, children, ...props } = this.props
+    var { country_state, sort_state, search_state, action_set_search_word, action_initial_country, action_add_country, children, ...props } = this.props
+    let searchWord
+    const send_set_search_word = () => {
+      action_set_search_word(searchWord.value)
+    }
     let code, continent, name, capital, phone
     const send_add_country = () => {
       action_add_country(code.value, continent.value, name.value, capital.value, phone.value)
@@ -40,14 +44,20 @@ class CountryList extends React.Component {
       action_initial_country()
     }
     let countries = (Object.keys(country_state)).map( (code) => ({...country_state[code], code:code}))
+    countries = countries.filter(country => {
+      for(let i=0; i<5; i++) if(country[englishHead[i]].includes(search_state.searchWord)) return true
+      return false
+    })
     countries.sort(function(country_0, country_1) {
       var multi = 1
       var field = englishHead[sort_state.headIndex]
       if(buttonList[sort_state.buttonIndex] == 'v') multi = -1
       return multi * (country_0[field].localeCompare(country_1[field]))
-    });
+    })
     return (
       <Wrapper {...props}>
+        <Input type="text" placeholder="searchWord" innerRef={(ref) => {searchWord = ref;}}></Input>
+        <button onClick={send_set_search_word}>검색하기</button>
         <button onClick={send_initial_country}>초기화</button>
         <Input type="text" placeholder="code" innerRef={(ref) => {code = ref;}}></Input>
         <Input type="text" placeholder="continent" innerRef={(ref) => {continent = ref;}}></Input>
