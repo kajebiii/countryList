@@ -77,27 +77,24 @@ class CountryTbody extends React.Component {
     this.country_code = ""
     this.row_click = this.row_click.bind(this)
     this.click_cancle = this.click_cancle.bind(this)
-    this.initState = this.initState.bind(this)
     this.findScroll = this.findScroll.bind(this)
     this.doQuery = this.doQuery.bind(this)
     this.handleOnScroll = this.handleOnScroll.bind(this)
     this.querySearchResult = this.querySearchResult.bind(this)
   }
-  componentWillReceiveProps(nextProps) {
-    if(this.state.lastCountry === undefined) this.initState(nextProps)
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    return true
-  }
   componentDidMount() {
     window.addEventListener('scroll', this.handleOnScroll);
-    this.initState(this.props)
+    this.timerID = setInterval(
+      () => this.findScroll(),
+      1000
+    );
   }
-  initState(props) {
-    this.setState({lastCountry: getCountry(this.props.countries, 40), requestSent: true})
-    setTimeout(this.findScroll, 2000)
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleOnScroll);
+    clearInterval(this.timerID);
   }
   findScroll() {
+    if (this.state.requestSent) return
     let { sort_state, countries } = this.props
     var scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop
     var scrollHeight = (document.documentElement && document.documentElement.scrollHeight) || document.body.scrollHeight
@@ -111,12 +108,8 @@ class CountryTbody extends React.Component {
     let ix = 0
     for(let i=0; i<countries.length; i++) if(compareFunction(this.state.lastCountry, countries[i], sort_state) < 0) {ix = i; break;}
     this.setState((prevState, props) => ({
-      lastCountry: getCountry(countries, ix+20-1), requestSent: true
+      lastCountry: getCountry(countries, ix+20-1), requestSent: false
     }))
-    setTimeout(this.findScroll, 1000)
-  }
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleOnScroll);
   }
   handleOnScroll() {
     // http://stackoverflow.com/questions/9439725/javascript-how-to-detect-if-browser-window-is-scrolled-to-bottom
@@ -128,7 +121,7 @@ class CountryTbody extends React.Component {
   }
   querySearchResult() {
     let { sort_state, countries } = this.props
-    if (this.state.requestSent || compareFunction(this.state.lastCountry, countries[countries.length-1], sort_state) >= 0) return;
+    if(this.state.requestSent || compareFunction(this.state.lastCountry, countries[countries.length-1], sort_state) >= 0) return;
     this.setState({requestSent: true})
     setTimeout(this.doQuery, 1000)
   }
