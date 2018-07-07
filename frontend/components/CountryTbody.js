@@ -1,20 +1,36 @@
 import React, { PropTypes } from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import Country from '../containers/Country'
 
 const Wrapper = styled.div`
-  font-family: ${font('primary')};
-  color: ${palette('grayscale', 0)};
+.example-enter {
+opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+opacity: 1;
+transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+opacity: 1;
+}
+
+.example-leave.example-leave-active {
+opacity: 0.01;
+transition: opacity 300ms ease-in;
+}
 `
 
-const HoverTr = styled.tr`
+const HoverTr = styled.div`
   &:hover {
     background-color: #bdf;
   }
 `
 
-const SelectTr = styled.tr`
+const SelectTr = styled.div`
   background-color: #fdb;
 `
 
@@ -36,7 +52,11 @@ class CountryTbody extends React.Component {
   render(){
     var { countries, children, ...props } = this.props
     return (
-      <tbody {...props}>
+      <Wrapper {...props}>
+      <ReactCSSTransitionGroup
+          transitionName="example"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
         {countries.map( (country) => 
           (country.code === this.country_code) ?
           (
@@ -55,7 +75,8 @@ class CountryTbody extends React.Component {
           </HoverTr>
           )
         )}
-      </tbody>
+      </ReactCSSTransitionGroup>
+      </Wrapper>
     )
   }
 }
