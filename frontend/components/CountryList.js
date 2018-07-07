@@ -38,26 +38,20 @@ class CountryList extends React.Component {
   render(){
     var { country_state, sort_state, search_state, action_set_search_word, action_initial_all, action_add_country, children, ...props } = this.props
     let searchWord
-    const send_set_search_word = () => {
-      action_set_search_word(searchWord.value)
-    }
+    const send_set_search_word = () => action_set_search_word(searchWord.value)
     let code, continent, name, capital, phone
-    const send_add_country = () => {
-      action_add_country(code.value, continent.value, name.value, capital.value, phone.value)
-    }
-    const send_initial_all = () => {
-      action_initial_all()
-    }
+    const send_add_country = () => action_add_country(code.value, continent.value, name.value, capital.value, phone.value)
+    const send_initial_all = () => action_initial_all()
+
     let countries = (Object.keys(country_state)).map( (code) => ({...country_state[code], code:code}))
     countries = countries.filter(country => {
       for(let i=0; i<koreanHead.length; i++) if(country[englishHead[i]].includes(search_state.searchWord)) return true
       return false
     })
     countries.sort(function(country_0, country_1) {
-      let multi = 1
+      let multi = (buttonList[sort_state.buttonIndex] == '^' ? 1 : -1)
       let field = englishHead[sort_state.headIndex]
-      if(buttonList[sort_state.buttonIndex] == 'v') multi = -1
-      let first_comp = multi * ( (country_0[field]<country_1[field] ? -1 : 0) + (country_1[field]<country_0[field] ? +1 : 0) )
+      let first_comp = multi * ( (country_0[field] < country_1[field] ? -1 : 0) + (country_1[field] < country_0[field] ? +1 : 0) )
       if(first_comp != 0) return first_comp
       for(var ix in englishHead) {
         if(ix == sort_state.headIndex) continue;
@@ -67,6 +61,7 @@ class CountryList extends React.Component {
       }
       return 0
     })
+
     return (
       <Wrapper {...props}>
         <button onClick={send_initial_all}>전체 초기화</button>
@@ -83,27 +78,25 @@ class CountryList extends React.Component {
         <Input type="text" placeholder="phone" innerRef={(ref) => {phone = ref;}}></Input>
         <button onClick={send_add_country}>추가</button>
         <hr/>
-        <table style={{'textAlign': 'center'}} border={1}>
-          <thead><tr>
-            {(Array.from(new Array(koreanHead.length),(val,index)=>index)).map( (headIndex) => 
-              <th key={headIndex}>
-                {koreanHead[headIndex]}
-                <br/>
-                {(Array.from(new Array(2),(val,index)=>index)).map( (buttonIndex) => 
-                  (headIndex == sort_state.headIndex && buttonIndex == sort_state.buttonIndex ?
-                    <SelectButton key={buttonIndex} onClick={()=>this.button_click(headIndex, buttonIndex)}>
-                      {buttonList[buttonIndex]}
-                    </SelectButton>
-                    :
-                    <HoverButton key={buttonIndex} onClick={()=>this.button_click(headIndex, buttonIndex)}>
-                    {buttonList[buttonIndex]}
-                    </HoverButton>
-                  )
-                )}
-              </th>
+        <table style={{'textAlign': 'center'}} border={1}><thead><tr>
+        {(Array.from(new Array(koreanHead.length),(val,index)=>index)).map( (headIndex) => 
+          <th key={headIndex}>
+            {koreanHead[headIndex]}
+            <br/>
+            {(Array.from(new Array(2),(val,index)=>index)).map( (buttonIndex) => 
+              (headIndex == sort_state.headIndex && buttonIndex == sort_state.buttonIndex ?
+                <SelectButton key={buttonIndex} onClick={()=>this.button_click(headIndex, buttonIndex)}>
+                  {buttonList[buttonIndex]}
+                </SelectButton>
+                :
+                <HoverButton key={buttonIndex} onClick={()=>this.button_click(headIndex, buttonIndex)}>
+                {buttonList[buttonIndex]}
+                </HoverButton>
+              )
             )}
-          </tr></thead>
-        </table>
+          </th>
+        )}
+        </tr></thead></table>
         <CountryTbody countries={countries}/>
         {children}
       </Wrapper>
