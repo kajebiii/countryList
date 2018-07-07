@@ -4,6 +4,7 @@ import { font, palette } from 'styled-theme'
 import CountryTbody from './CountryTbody'
 import Input from './Input'
 import AddCountryForm from './AddCountryForm'
+import SearchCountryForm from './SearchCountryForm'
 import { koreanHead, englishHead, buttonList } from './constValue'
 
 const Wrapper = styled.div`
@@ -36,14 +37,16 @@ class CountryList extends React.Component {
     var { action_select_sort } = this.props
     action_select_sort(headIndex, buttonIndex)
   }
-  submit = values => {
+  send_set_search_word = values => {
+    var { action_set_search_word } = this.props
+    action_set_search_word("searchWord" in values ? values.searchWord : "")
+  }
+  send_add_country = values => {
     var { action_add_country } = this.props
     action_add_country(values.code, values.continent, values.name, values.capital, values.phone)
   }
   render(){
     var { country_state, sort_state, search_state, action_set_search_word, action_initial_all, action_add_country, children, ...props } = this.props
-    let searchWord
-    const send_set_search_word = () => action_set_search_word(searchWord.value)
     const send_initial_all = () => action_initial_all()
 
     let countries = (Object.keys(country_state)).map( (code) => ({...country_state[code], code:code}))
@@ -69,12 +72,9 @@ class CountryList extends React.Component {
       <Wrapper {...props}>
         <button onClick={send_initial_all}>전체 초기화</button>
         <hr/>
-        <div>
-          <Input type="text" placeholder="searchWord" innerRef={(ref) => {searchWord = ref;}}></Input>
-          <button onClick={send_set_search_word}>검색하기</button>
-        </div>
+        <SearchCountryForm onSubmit={this.send_set_search_word} />
         <hr/>
-        <AddCountryForm onSubmit={this.submit} />
+        <AddCountryForm onSubmit={this.send_add_country} />
         <hr/>
         <table style={{'textAlign': 'center'}} border={1}><thead><tr>
         {(Array.from(new Array(koreanHead.length),(val,index)=>index)).map( (headIndex) => 
