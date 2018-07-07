@@ -9,11 +9,17 @@ const country_state = (country_state = initialCountryState, action) => {
         case actions.SET_COUNTRY:
             return action.country_dictionary
         case actions.ADD_COUNTRY:
-            return {...country_state, [action.code]: {capital:action.capital, name:action.name, continent:action.continent, phone:action.phone}}
+            var { code, continent, name, capital, phone } = action
+            return {...country_state, [code]: {capital, name, continent, phone}}
         case actions.DELETE_COUNTRY:
             const delete_state = Object.assign({}, country_state)
             delete delete_state[action.code]
             return delete_state
+        case actions.MODIFY_COUNTRY:
+            var { beforeCode, code, continent, name, capital, phone } = action
+            const modify_state = Object.assign({}, country_state)
+            delete modify_state[beforeCode]
+            return {...modify_state, [code]: {capital, name, continent, phone}}
         default:
             return country_state
     }

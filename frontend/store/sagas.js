@@ -53,6 +53,16 @@ export function* watchAddCheckCountry(action) {
         yield put(actions.send_alert('정상적으로 추가되었습니다.'))
     }
 }
+export function* watchModifyCheckCountry(action) {
+    const country_state = yield select((state) => state.country_state)
+    const {beforeCode, code, continent, name, capital, phone} = action
+    if(beforeCode !== code && code in country_state) {
+        yield put(actions.send_alert('이미 존재하는 국가 코드입니다.'))
+    }else{
+        yield put(actions.modify_country(beforeCode, code, continent, name, capital, phone))
+        yield put(actions.send_alert('정상적으로 수정되었습니다.'))
+    }
+}
 
 export function* watchSendAlert(action) {
     yield put(actions.add_alert(action.message))
@@ -65,6 +75,7 @@ export default function* () {
     yield fork(watchInitialCountry)
     yield takeEvery(actions.INITIAL_COUNTRY, watchInitialCountry)
     yield takeEvery(actions.ADD_CHECK_COUNTRY, watchAddCheckCountry)
+    yield takeEvery(actions.MODIFY_CHECK_COUNTRY, watchModifyCheckCountry)
 
     yield takeEvery(actions.SEND_ALERT, watchSendAlert)
 }
