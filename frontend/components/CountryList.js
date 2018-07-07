@@ -45,7 +45,7 @@ class CountryList extends React.Component {
     }
     let countries = (Object.keys(country_state)).map( (code) => ({...country_state[code], code:code}))
     countries = countries.filter(country => {
-      for(let i=0; i<5; i++) if(country[englishHead[i]].includes(search_state.searchWord)) return true
+      for(let i=0; i<koreanHead.length; i++) if(country[englishHead[i]].includes(search_state.searchWord)) return true
       return false
     })
     countries.sort(function(country_0, country_1) {
@@ -67,7 +67,7 @@ class CountryList extends React.Component {
         <button onClick={send_add_country}>추가</button>
         <table>
           <thead><tr>
-            {(Array.from(new Array(5),(val,index)=>index)).map( (headIndex) => 
+            {(Array.from(new Array(koreanHead.length),(val,index)=>index)).map( (headIndex) => 
               <th key={headIndex}>
                 {koreanHead[headIndex]}
                 <br/>
@@ -84,6 +84,9 @@ class CountryList extends React.Component {
                 )}
               </th>
             )}
+            <th>
+              TODO
+            </th>
           </tr></thead>
           <CountryTbody countries={countries}/>
         </table>
