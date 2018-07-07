@@ -95,7 +95,7 @@ class CountryList extends React.Component {
           </th>
         )}
         </tr></thead></table>
-        <CountryTbody countries={countries}/>
+        <CountryTbody countries={countries} sort_state={sort_state}/>
         {children}
       </Wrapper>
     )
